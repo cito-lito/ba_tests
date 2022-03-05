@@ -1,4 +1,4 @@
-from brownie import accounts, network, config,  Owner
+from brownie import accounts, network, Owner
 
 ## add account: brownie accounts new nameOfneAccount
 ### accounts.load("my_account")
