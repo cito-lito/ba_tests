@@ -14,8 +14,8 @@ def deploy_owner():
     # change owner:
     #tx = owner_contract.changeOwner("0x1667E22c87d39Ad1c9fC5D22123C42b7bcB2fC3d", {"from":account})
     #tx.wait(1)
-   # owner_acc = owner_contract.getOwner()
-   # print(f"owner is {owner_acc}")
+    #owner_acc = owner_contract.getOwner()
+    #print(f"owner is {owner_acc}")
 
 
 def get_account():
