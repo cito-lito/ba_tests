@@ -18,8 +18,10 @@ def witdraw(account, amount):
 def main():
     ## checking...
     account = accounts.load("dev")
-    tx = deposit(account, Wei("0.1 ether"))  
+    tx = deposit(account, Wei("0.2 ether"))  
     print(f"deposit transaction is: {tx}")
-    tx = witdraw(account, Wei("0.05 ether"))  
+    tx = witdraw(account, Wei("0.1 ether"))  
     print(f"witdraw transaction is: {tx}")
     
+if __name__ == "__main__":
+    main()
