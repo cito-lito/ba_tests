@@ -1,7 +1,5 @@
 from brownie import accounts, interface, config, network, Wei
 
-
-    
 def deposit(account, amount):
     weth = interface.WethInterface(config["networks"][network.show_active()]["weth_token"])
     tx = weth.deposit({"from":account, "value":amount})   
