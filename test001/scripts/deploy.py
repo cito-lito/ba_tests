@@ -1,6 +1,6 @@
 from brownie import accounts, network, Owner
 
-## add account: brownie accounts new nameOfneAccount
+## add account: brownie accounts new my_account
 ### accounts.load("my_account")
 
 def deploy_owner():

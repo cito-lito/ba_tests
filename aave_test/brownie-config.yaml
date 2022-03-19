@@ -11,9 +11,18 @@ networks:
   kovan:
     aave_pool_addr_provider: '0x88757f2f99175387aB4C6a4b3067c77A695b0349'
     weth_token: '0xd0A1E359811322d97991E03f863a0C30C2cF029C'
-  hardhat-fork:
+    dai_toke: ''
+
+  mainnet-fork:
+    aave_pool_addr_provider: '0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5'
     weth_token: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
-  mainnet:
-    weth_token: '0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2'
+    dai_toke: ''
+
+  polygon-main-fork:
+    aave_pool_addr_provider: ''
+    weth_token: ''
+    dai_toke: ''
+
+
 
 

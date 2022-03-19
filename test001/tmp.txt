@@ -1,4 +1,4 @@
 deployment:
     --> local network: ganache // temporary development network
-    --> test network: rinkeby // testnet
+    --> test network: rinkeby // testnet ---> 
     --> mainnet: ethereum, poligon-main ...
