@@ -4,6 +4,9 @@ from scripts import erc20, pool, utils, weth
 
 def deposit(account, token, amount):
 
+    if token == "weth_token":
+        ether_deposit(account,amount)
+
     #### if token is supported :
     token_addr = config["networks"][network.show_active()][token]
     balance = erc20.balance_of(account.address, token_addr)
@@ -12,8 +15,17 @@ def deposit(account, token, amount):
 
     lending_pool = pool.get_lending_pool()
 
-    allowed = erc20.check_allowance(account.address, token, lending_pool.address)
-    print(allowed)
+    ## not sure if needed: avoid vector attack; approve && transfer only the req amount
+    allowed_amount = erc20.check_allowance(account.address, token_addr, lending_pool.address)
+    if allowed_amount > 0:
+        erc20.approve_erc20(account, 0, token_addr, lending_pool.address)
+
+    if balance >= amount:
+        erc20.approve_erc20(account, amount, token_addr, lending_pool.address)
+        pool.deposit(token_addr,amount, account)
+    else:
+        print("error: balance")
+
     # pool.deposit(token, amount, account)
 
     # result = pool.withdraw(token, amount,account)
@@ -29,13 +41,13 @@ def ether_deposit(account, amount):
     eth_balance = account.balance()
     lending_pool = pool.get_lending_pool()
     
-    ## not sure if needed: avoid vector attack: approve && transfer only the req amount
+    ## not sure if needed: avoid vector attack; approve && transfer only the req amount
     allowed_amount = erc20.check_allowance(account.address, weth_token, lending_pool.address)
     if allowed_amount > 0:
         erc20.approve_erc20(account, 0, weth_token, lending_pool.address)
         
     if weth_balance >= amount:
-        erc20.approve_erc20(account, amount, weth_token, lending_pool.address)
+        erc20.approve_erc20(account, amount, weth_token, lending_pool.address) 
         pool.deposit(weth_token, amount, account)
     elif eth_balance >= (amount - weth_balance):
         # get weth from eth and deposit:
@@ -52,7 +64,7 @@ def main():
     account = utils.get_account("dev")
     token = config["networks"][network.show_active()]["weth_token"]
     # deposit(account, token, Wei("0.05 ether"))
-    ether_deposit(account, 0)
+    ether_deposit(account, Wei("0.35 ether"))
     pass
 
 
