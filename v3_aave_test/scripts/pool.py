@@ -1,0 +1,56 @@
+
+from brownie import Wei, interface, network, config
+from scripts import utils
+
+def deposit(asset_addr, amount, on_behalf_of, referral_code=0):
+    """deposit asset into the lending pool
+    Args:
+        asset_addr: address of the token
+        amount : amount
+        on_behalf_of : user, asset owner
+        referral_code (int, optional):  Defaults to 0.
+    """
+    pool = get_lending_pool()
+    tx = pool.deposit(asset_addr, amount, on_behalf_of.address, referral_code, {"from": on_behalf_of})
+    tx.wait(1)
+    
+
+def withdraw(asset_addr, amount, to):
+    pool = get_lending_pool()
+    tx = pool.withdraw(asset_addr, amount, to.address, {"from": to})
+    tx.wait(1)
+    return tx
+
+def get_user_acc_data(addr):
+    """ get account data
+    Args:
+        addr (_type_): account address
+    Returns:
+        tuple: 
+    total_collateral_ETH,
+    total_debt_ETH,
+    available_borrow_ETH,
+    liquidation_threshold,
+    ltv,
+    health_factor """
+    pool = get_lending_pool()
+    return pool.getUserAccountData(addr) 
+
+def get_lending_pool():
+    print("getting pool")
+    pool_addr_prov = interface.IPoolAddressesProvider(
+        config["networks"][network.show_active()]["pool_addr_provider"])
+    print(f"pool_addr_provider_contract: {pool_addr_prov}")
+    pool_addr = pool_addr_prov.getPool()
+    print(f"pool addr: {pool_addr}")
+    a = interface.IPool(pool_addr)
+    print(dir(a))
+    return (interface.IPool(pool_addr))
+    
+
+def main():
+    get_lending_pool()
+
+    
+if __name__ == "__main__":
+    main()
