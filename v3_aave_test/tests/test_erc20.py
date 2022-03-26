@@ -18,7 +18,6 @@ def dev_account():
     return utils.get_account("dev")
 
 
-
 @pytest.fixture(scope="module")
 def token_addr():
     return config["networks"][network.show_active()]["dai"]
