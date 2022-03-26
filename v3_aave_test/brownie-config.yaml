@@ -7,7 +7,7 @@ networks:
   rinkeby: 
     pool_addr_provider: '0xA55125A90d75a95EC00130E8E8C197dB5641Eb19'
     weth: '0xc778417E063141139Fce010982780140Aa0cD5Ab'
-    dai: '0x2Ec4c6fCdBF5F9beECeB1b51848fc2DB1f3a26af'
+    dai: '0x4aAded56bd7c69861E8654719195fCA9C670EB45'
 
   kovan:
     pool_addr_provider: '0x87A5b1cD19fC93dfeb177CCEc3686a48c53D65Ec'
