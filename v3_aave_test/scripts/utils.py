@@ -2,7 +2,7 @@ from brownie import accounts, network, config
 
 
 ## supported tokens in aave:
-SUPPORTED_TOKENS = ['dai', 'usdc', ]
+SUPPORTED_TOKENS = ['dai', 'usdc' ]
 
 
 def get_account(added_account=None):
