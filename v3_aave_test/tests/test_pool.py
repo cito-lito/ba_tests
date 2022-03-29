@@ -1,3 +1,4 @@
+import numbers
 from brownie import config, network, accounts, Wei
 from scripts import erc20, utils, pool
 import pytest
@@ -47,3 +48,21 @@ def test_supply(dai_addr, amount, dev_account):
     # Assert
     print(f"a: {a} b: {b}")
     assert (b-a) >= amount 
+
+    
+def test_withdraw(dai_addr, amount, dev_account):
+    # Arrange, already enough dai deposited into th lp
+    # Act
+    a = erc20.balance_of(dev_account.address, dai_addr)
+    pool.withdraw(dai_addr,amount,dev_account)
+    b = erc20.balance_of(dev_account.address, dai_addr)
+    # Assert
+    print(f"a : {a} b: {b} amount: {amount} b-a: {b-a}")
+    assert(b-a) == amount
+
+
+
+def test_get_user_acc_data(dev_account):
+    data = pool.get_user_acc_data(dev_account.address)
+    for i in data:
+        assert isinstance(i, numbers.Number)

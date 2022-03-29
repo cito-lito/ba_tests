@@ -28,7 +28,7 @@ def withdraw(asset_addr, amount, to):
     Args:
         asset_addr: addr of the underlaying asset
         amount: amount
-        to: the receiver of the asset
+        to: the receiver of the asset, the msg sender
     Returns:
         tx: the withdraw tx
     """
