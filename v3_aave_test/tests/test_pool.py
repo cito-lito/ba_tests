@@ -57,7 +57,6 @@ def test_withdraw(dai_addr, amount, dev_account):
     pool.withdraw(dai_addr,amount,dev_account)
     b = erc20.balance_of(dev_account.address, dai_addr)
     # Assert
-    print(f"a : {a} b: {b} amount: {amount} b-a: {b-a}")
     assert(b-a) == amount
 
 
